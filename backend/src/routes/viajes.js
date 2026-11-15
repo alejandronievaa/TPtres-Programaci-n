@@ -31,4 +31,11 @@ router.get('/', filtros, validate, async (req, res) => {
   res.json(rows);
 });
 
+router.get('/km', filtros, validate, async (req, res) => {
+  const { where, vals } = armarWhere(req.query);
+  const [rows] = await pool.query(
+    `SELECT COALESCE(SUM(v.kilometros), 0) AS total_km FROM viajes v ${where}`, vals);
+  res.json({ total_km: Number(rows[0].total_km) });
+});
+
 export default router;
