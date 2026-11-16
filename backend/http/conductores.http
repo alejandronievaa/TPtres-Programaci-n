@@ -1,0 +1,45 @@
+@url = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk0ODYzNTQ0LCJleHAiOjE3OTQ4Nzc5NDR9.mwXEI7ojyViIr9oQ3sp0qB49PdzArqI8w0p35FYBZW0
+
+### Listar
+GET {{url}}/conductores
+Authorization: Bearer {{token}}
+
+### Crear (licencia vigente)
+POST {{url}}/conductores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "nombre": "Juan", "apellido": "Perez", "numero_documento": "30123456", "numero_licencia": "LIC-001", "fecha_alta_licencia": "2020-01-15", "fecha_vencimiento_licencia": "2030-01-15" }
+
+### Crear (licencia VENCIDA, para probar el 403 en viajes)
+POST {{url}}/conductores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "nombre": "Pedro", "apellido": "Gomez", "numero_documento": "28999888", "numero_licencia": "LIC-002", "fecha_alta_licencia": "2010-01-15", "fecha_vencimiento_licencia": "2015-01-15" }
+
+### Obtener uno
+GET {{url}}/conductores/1
+Authorization: Bearer {{token}}
+
+### Modificar
+PUT {{url}}/conductores/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "nombre": "Juan", "apellido": "Perez", "numero_documento": "30123456", "numero_licencia": "LIC-001", "fecha_alta_licencia": "2020-01-15", "fecha_vencimiento_licencia": "2031-01-15" }
+
+### Error 400 (vencimiento anterior al alta)
+POST {{url}}/conductores
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "nombre": "X", "apellido": "Y", "numero_documento": "1", "numero_licencia": "L", "fecha_alta_licencia": "2025-01-01", "fecha_vencimiento_licencia": "2020-01-01" }
+
+### Error 401 (sin token)
+GET {{url}}/conductores
+
+### Error 404
+GET {{url}}/conductores/9999
+Authorization: Bearer {{token}}
