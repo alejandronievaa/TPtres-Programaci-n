@@ -1,0 +1,42 @@
+@url = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk0ODYzNTQ0LCJleHAiOjE3OTQ4Nzc5NDR9.mwXEI7ojyViIr9oQ3sp0qB49PdzArqI8w0p35FYBZW0
+
+### Listar
+GET {{url}}/vehiculos
+Authorization: Bearer {{token}}
+
+### Crear
+POST {{url}}/vehiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "marca": "Mercedes", "modelo": "Sprinter", "patente": "AB123CD", "anio": 2021, "capacidad_carga": 1500 }
+
+### Obtener uno
+GET {{url}}/vehiculos/1
+Authorization: Bearer {{token}}
+
+### Modificar
+PUT {{url}}/vehiculos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "marca": "Mercedes", "modelo": "Sprinter", "patente": "AB123CD", "anio": 2022, "capacidad_carga": 1600 }
+
+### Error 400 (datos inválidos)
+POST {{url}}/vehiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "marca": "", "anio": 1800 }
+
+### Error 401 (sin token)
+GET {{url}}/vehiculos
+
+### Error 404
+GET {{url}}/vehiculos/9999
+Authorization: Bearer {{token}}
+
+### Eliminar
+DELETE {{url}}/vehiculos/1
+Authorization: Bearer {{token}}
