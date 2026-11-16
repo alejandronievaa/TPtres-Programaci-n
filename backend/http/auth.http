@@ -1,0 +1,25 @@
+@url = http://localhost:3000/api
+
+### Registro
+POST {{url}}/auth/register
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@mail.com", "password": "123456" }
+
+### Login
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{ "email": "ana@mail.com", "password": "123456" }
+
+### Error 400 (email inválido)
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{ "email": "mal", "password": "" }
+
+### Error 401 (credenciales incorrectas)
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{ "email": "ana@mail.com", "password": "incorrecta" }
