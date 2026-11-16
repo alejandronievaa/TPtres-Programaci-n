@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk0ODYzNTQ0LCJleHAiOjE3OTQ4Nzc5NDR9.mwXEI7ojyViIr9oQ3sp0qB49PdzArqI8w0p35FYBZW0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk0ODY0NTU2LCJleHAiOjE3OTQ4Nzg5NTZ9.o0qQfno999aTLFBeh9wLTO9Hv_P_9blifmMPx341ZII
 
 ### Listar
 GET {{url}}/conductores

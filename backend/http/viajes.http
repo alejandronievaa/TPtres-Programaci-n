@@ -1,0 +1,53 @@
+@url = http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk0ODY0NTU2LCJleHAiOjE3OTQ4Nzg5NTZ9.o0qQfno999aTLFBeh9wLTO9Hv_P_9blifmMPx341ZII
+
+### Crear viaje (OK)
+POST {{url}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "vehiculo_id": 2, "conductor_id": 1, "fecha_salida": "2026-11-10T08:00", "fecha_llegada": "2026-11-10T14:00", "origen": "La Rioja", "destino": "Córdoba", "kilometros": 450, "observaciones": "Sin novedades" }
+
+### Historial completo
+GET {{url}}/viajes
+Authorization: Bearer {{token}}
+
+### Historial por vehículo
+GET {{url}}/viajes?vehiculo_id=2
+Authorization: Bearer {{token}}
+
+### Historial por conductor
+GET {{url}}/viajes?conductor_id=1
+Authorization: Bearer {{token}}
+
+### Total de km por conductor
+GET {{url}}/viajes/km?conductor_id=1
+Authorization: Bearer {{token}}
+
+### Total de km por vehículo
+GET {{url}}/viajes/km?vehiculo_id=2
+Authorization: Bearer {{token}}
+
+### Error 403 (licencia vencida)
+POST {{url}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "vehiculo_id": 2, "conductor_id": 2, "fecha_salida": "2026-11-10T08:00", "fecha_llegada": "2026-11-10T14:00", "origen": "La Rioja", "destino": "Córdoba", "kilometros": 450 }
+
+### Error 400 (llegada anterior a salida)
+POST {{url}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "vehiculo_id": 2, "conductor_id": 1, "fecha_salida": "2026-11-10T14:00", "fecha_llegada": "2026-11-10T08:00", "origen": "A", "destino": "B", "kilometros": 10 }
+
+### Error 404 (vehículo inexistente)
+POST {{url}}/viajes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "vehiculo_id": 9999, "conductor_id": 1, "fecha_salida": "2026-11-10T08:00", "fecha_llegada": "2026-11-10T14:00", "origen": "A", "destino": "B", "kilometros": 10 }
+
+### Error 401 (sin token)
+GET {{url}}/viajes
